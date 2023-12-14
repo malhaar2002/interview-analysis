@@ -3,4 +3,5 @@ pp_data/
 paths.py
 __pycache__/
 frames_collage*
-cnn/
+cnn/frames_collage
+cnn/cnn_lstm_variables.pkl
