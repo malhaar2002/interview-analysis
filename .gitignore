@@ -1,0 +1,6 @@
+data/
+pp_data/
+paths.py
+__pycache__/
+frames_collage*
+cnn/
