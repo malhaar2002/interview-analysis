@@ -5,3 +5,4 @@ __pycache__/
 frames_collage*
 cnn/frames_collage
 cnn/cnn_lstm_variables.pkl
+app/secret.py
