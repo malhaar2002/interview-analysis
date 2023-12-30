@@ -1,13 +1,7 @@
 import streamlit as st
 import numpy as np
+from pred import make_prediction
 
-# Function to perform video analysis and return predicted labels
-def video_analysis(uploaded_file):
-    # Placeholder for analysis logic - replace this with your actual analysis code
-    # For demonstration purposes, generating random labels
-    labels = generate_sample_labels()
-
-    return labels
 
 # Function to display analysis results and provide feedback
 def display_results(labels):
@@ -144,7 +138,7 @@ def main():
         # Perform analysis
         analysis_button = st.button("Perform Analysis")
         if analysis_button:
-            labels = video_analysis(uploaded_file)
+            labels = make_prediction(uploaded_file)
             display_results(labels)
 
 if __name__ == "__main__":

@@ -87,10 +87,13 @@ def runPCA(df):
     x = StandardScaler().fit_transform(x)
     # PCA
     pca = pickle.load(open('../models/pca_model.pkl', 'rb'))
-    principalComponents = pca.fit_transform(x)
+    principalComponents = pca.transform(x)
     principalDf = pd.DataFrame(data = principalComponents, columns = ['JitterPCA', 'ShimmerPCA'])
     return principalDf
 
+
+def calculate_z_score(x, mean, std):
+    return (x-mean)/std
 
 
 def extract_praat_features(video_path):
@@ -121,7 +124,7 @@ def extract_praat_features(video_path):
     }))
 
     # Calculate vocal-tract length estimates
-    pF = (zscore(f1_median) + zscore(f2_median) + zscore(f3_median) + zscore(f4_median)) / 4
+    pF = (calculate_z_score(f1_median, 496.0428522921353, 41.80788949595729) + calculate_z_score(f2_median, 1626.9758909632872, 89.54888245840672) + calculate_z_score(f3_median, 2603.7923145976265, 107.64036595614571) + calculate_z_score(f4_median, 3660.265503495315, 145.75539455320262)) / 4
     fdisp = (f4_median - f1_median) / 3
     avgFormant = (f1_median + f2_median + f3_median + f4_median) / 4
     mff = (f1_median * f2_median * f3_median * f4_median) ** 0.25
@@ -137,42 +140,39 @@ def extract_praat_features(video_path):
 
     # Create a dictionary to store the features
     features = {
-        'video_path': [video_path],
-        'duration': [duration],
-        'meanF0': [meanF0],
-        'stdevF0': [stdevF0],
-        'hnr': [hnr],
-        'localJitter': [localJitter],
-        'localabsoluteJitter': [localabsoluteJitter],
-        'rapJitter': [rapJitter],
-        'ppq5Jitter': [ppq5Jitter],
-        'ddpJitter': [ddpJitter],
-        'localShimmer': [localShimmer],
-        'localdbShimmer': [localdbShimmer],
-        'apq3Shimmer': [apq3Shimmer],
-        'aqpq5Shimmer': [aqpq5Shimmer],
-        'apq11Shimmer': [apq11Shimmer],
-        'ddaShimmer': [ddaShimmer],
-        'f1_mean': [f1_mean],
-        'f2_mean': [f2_mean],
-        'f3_mean': [f3_mean],
-        'f4_mean': [f4_mean],
-        'f1_median': [f1_median],
-        'f2_median': [f2_median],
-        'f3_median': [f3_median],
-        'f4_median': [f4_median],
-        'JitterPCA': [pca_data['JitterPCA'].values[0]],
-        'ShimmerPCA': [pca_data['ShimmerPCA'].values[0]],
-        'pF': [pF],
-        'fdisp': [fdisp],
-        'avgFormant': [avgFormant],
-        'mff': [mff],
-        'fitch_vtl': [fitch_vtl],
-        'delta_f': [delta_f],
-        'vtl_delta_f': [vtl_delta_f]
+        'video_path': video_path,
+        'duration': duration,
+        'meanF0': meanF0,
+        'stdevF0': stdevF0,
+        'hnr': hnr,
+        'localJitter': localJitter,
+        'localabsoluteJitter': localabsoluteJitter,
+        'rapJitter': rapJitter,
+        'ppq5Jitter': ppq5Jitter,
+        'ddpJitter': ddpJitter,
+        'localShimmer': localShimmer,
+        'localdbShimmer': localdbShimmer,
+        'apq3Shimmer': apq3Shimmer,
+        'aqpq5Shimmer': aqpq5Shimmer,
+        'apq11Shimmer': apq11Shimmer,
+        'ddaShimmer': ddaShimmer,
+        'f1_mean': f1_mean,
+        'f2_mean': f2_mean,
+        'f3_mean': f3_mean,
+        'f4_mean': f4_mean,
+        'f1_median': f1_median,
+        'f2_median': f2_median,
+        'f3_median': f3_median,
+        'f4_median': f4_median,
+        'JitterPCA': pca_data['JitterPCA'].values[0],
+        'ShimmerPCA': pca_data['ShimmerPCA'].values[0],
+        'pF': pF,
+        'fdisp': fdisp,
+        'avgFormant': avgFormant,
+        'mff': mff,
+        'fitch_vtl': fitch_vtl,
+        'delta_f': delta_f,
+        'vtl_delta_f': vtl_delta_f
     }
 
-    # Create a DataFrame from the dictionary
-    df_features = pd.DataFrame(features)
-
-    return df_features
+    return features 
