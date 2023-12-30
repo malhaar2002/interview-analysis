@@ -1,7 +1,10 @@
+import os
 import cv2
-from fer import Video
-from fer import FER
 import pandas as pd
+from fer import FER
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
 
 def extract_emotions(video_path):
     # Load the video

@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import numpy as np
 from pred import make_prediction
 
@@ -134,12 +135,17 @@ def main():
     if uploaded_file is not None:
         # Display uploaded video
         st.video(uploaded_file)
+        # save the uploaded file
+        with open(uploaded_file.name, "wb") as f:
+            f.write(uploaded_file.read())
 
         # Perform analysis
         analysis_button = st.button("Perform Analysis")
         if analysis_button:
-            labels = make_prediction(uploaded_file)
+            with st.spinner("Analyzing..."):
+                labels = make_prediction(uploaded_file.name)
             display_results(labels)
+            os.remove(uploaded_file.name)
 
 if __name__ == "__main__":
     main()

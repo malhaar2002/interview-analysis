@@ -140,11 +140,10 @@ def extract_praat_features(video_path):
 
     # Create a dictionary to store the features
     features = {
-        'video_path': video_path,
         'duration': duration,
-        'meanF0': meanF0,
-        'stdevF0': stdevF0,
-        'hnr': hnr,
+        'meanF0Hz': meanF0,
+        'stdevF0Hz': stdevF0,
+        'HNR': hnr,
         'localJitter': localJitter,
         'localabsoluteJitter': localabsoluteJitter,
         'rapJitter': rapJitter,
@@ -153,7 +152,7 @@ def extract_praat_features(video_path):
         'localShimmer': localShimmer,
         'localdbShimmer': localdbShimmer,
         'apq3Shimmer': apq3Shimmer,
-        'aqpq5Shimmer': aqpq5Shimmer,
+        'apq5Shimmer': aqpq5Shimmer,
         'apq11Shimmer': apq11Shimmer,
         'ddaShimmer': ddaShimmer,
         'f1_mean': f1_mean,
