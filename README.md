@@ -15,9 +15,10 @@ providing detailed and nuanced feedback on aspects such as
 friendliness, excitement, engagement, structured answers, and
 calmness. This, in turn, could lead to improved interview
 performance, increased self-awareness, and better overall
-communication skills
+communication skills <br><br>
 
-Here is our methodology, summed up:
+Here is what we did, summed up:
 
 ![prepai](https://github.com/user-attachments/assets/ec7d5ffb-3c96-4ace-9727-d9c75a28fdec)
 
+Please view <a href="https://github.com/malhaar2002/interview-analysis/blob/master/prepai.pdf">prepai.pdf</a> to take a deeper look into our methodology
